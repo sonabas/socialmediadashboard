@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Monitoring Dashboard</title>
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: #4CAF50;
+        }
+
+        .chart-container {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Social Media Monitoring Dashboard</h1>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-title">
+            <h2>Social Media Analytics Overview</h2>
+        </div>
+
+        <div class="grid">
+            <!-- Followers/Engagement Overview -->
+            <div class="card">
+                <h3>Followers Growth</h3>
+                <div class="chart-container">
+                    <canvas id="followersChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Posts Analytics Overview -->
+            <div class="card">
+                <h3>Posts Engagement</h3>
+                <div class="chart-container">
+                    <canvas id="postsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Hashtag Popularity -->
+            <div class="card">
+                <h3>Top Hashtags</h3>
+                <div class="chart-container">
+                    <canvas id="hashtagsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for rendering charts -->
+    <script>
+        // Followers Growth Chart
+        const followersCtx = document.getElementById('followersChart').getContext('2d');
+        const followersChart = new Chart(followersCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Followers',
+                    data: [1200, 1350, 1450, 1600, 1800, 2000],
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    borderColor: 'rgba(76, 175, 80, 1)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Posts Engagement Chart
+        const postsCtx = document.getElementById('postsChart').getContext('2d');
+        const postsChart = new Chart(postsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Post 1', 'Post 2', 'Post 3', 'Post 4', 'Post 5'],
+                datasets: [{
+                    label: 'Engagements',
+                    data: [500, 700, 600, 800, 1200],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Top Hashtags Chart
+        const hashtagsCtx = document.getElementById('hashtagsChart').getContext('2d');
+        const hashtagsChart = new Chart(hashtagsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['#tech', '#innovation', '#ai', '#programming', '#design'],
+                datasets: [{
+                    label: 'Hashtag Usage',
+                    data: [30, 20, 25, 15, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>
